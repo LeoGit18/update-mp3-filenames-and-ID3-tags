@@ -4,6 +4,7 @@
 import feedparser
 import time
 import os
+import sys
 from mutagen.easyid3 import EasyID3
 
 #-------------------------------------------------------------------------------------------
@@ -107,34 +108,39 @@ def checkUpdate_FileNameID3tag(url2Parse, podcastName, parentFolder):
 #===========================================================================================
 #    STARTING...
 #===========================================================================================
-print ("\n------------------------------------------------")
-print (" " + time.ctime() + " - Starting 'Feedparser test'...")
-print ("------------------------------------------------\n")
+try:
+    print ("\n------------------------------------------------")
+    print (" " + time.ctime() + " - Starting 'Feedparser test'...")
+    print ("------------------------------------------------\n")
+    
+    parent_Folder = ("E:\Podcasts\Temp") # ("S:\Podcasts\Temp\\")
 
-parent_Folder = ("E:\Podcasts\Temp") # ("S:\Podcasts\Temp\\")
+    rss_feed = 'https://www.rsi.ch/rete-due/programmi/cultura/il-giardino-di-albert/?f=podcast-xml'
+    podcast_Name = "Il_Giardino_di_Albert_"
+    checkUpdate_FileNameID3tag(rss_feed, podcast_Name, parent_Folder)
 
-rss_feed = 'https://www.rsi.ch/rete-due/programmi/cultura/il-giardino-di-albert/?f=podcast-xml'
-podcast_Name = "Il_Giardino_di_Albert_"
-checkUpdate_FileNameID3tag(rss_feed, podcast_Name, parent_Folder)
+    print ("\n------------------------------------------------------------------------------------------------\n")
 
-print ("\n------------------------------------------------------------------------------------------------\n")
+    rss_feed = 'https://www.rsi.ch/rete-due/programmi/cultura/birdland/?f=podcast-xml'
+    podcast_Name = "Birdland_"
+    checkUpdate_FileNameID3tag(rss_feed, podcast_Name, parent_Folder)
 
-rss_feed = 'https://www.rsi.ch/rete-due/programmi/cultura/birdland/?f=podcast-xml'
-podcast_Name = "Birdland_"
-checkUpdate_FileNameID3tag(rss_feed, podcast_Name, parent_Folder)
+    print ("\n------------------------------------------------------------------------------------------------\n")
 
-print ("\n------------------------------------------------------------------------------------------------\n")
+    rss_feed = 'https://www.rsi.ch/rete-tre/programmi/intrattenimento/il-disinformatico/?f=podcast-xml'
+    podcast_Name = "Il_Disinformatico_"
+    checkUpdate_FileNameID3tag(rss_feed, podcast_Name, parent_Folder)
 
-rss_feed = 'https://www.rsi.ch/rete-tre/programmi/intrattenimento/il-disinformatico/?f=podcast-xml'
-podcast_Name = "Il_Disinformatico_"
-checkUpdate_FileNameID3tag(rss_feed, podcast_Name, parent_Folder)
+    print ("\n------------------------------------------------------------------------------------------------\n")
 
-print ("\n------------------------------------------------------------------------------------------------\n")
-
-prices = {'apple': 0.40, 'banana': 0.50}
-my_purchase = {
-    'apple': 1,
-    'banana': 6}
-grocery_bill = sum(prices[fruit] * my_purchase[fruit]
+    prices = {'apple': 0.40, 'banana': 0.50}
+    my_purchase = {
+        'apple': 1,
+        'banana': 6}
+    grocery_bill = sum(prices[fruit] * my_purchase[fruit]
                    for fruit in my_purchase)
-print ('\nI owe the grocer $%.2f' % grocery_bill)
+    print ('\nI owe the grocer $%.2f' % grocery_bill)
+
+except: # catch *all* exceptions
+    e = sys.exc_info()[0]
+    print( "<p>Error: %s</p>" % e )
